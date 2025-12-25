@@ -4,7 +4,10 @@ import numpy as np
 import json
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from nse_fetcher import get_top_500_active_stocks, get_fno_ban_list, get_ohlc_history, get_fii_sentiment
+try:
+    from nse_fetcher import get_top_500_active_stocks, get_fno_ban_list, get_ohlc_history, get_fii_sentiment
+except ImportError:
+    from logic.nse_fetcher import get_top_500_active_stocks, get_fno_ban_list, get_ohlc_history, get_fii_sentiment
 
 def calculate_hv(df, window=20):
     if df.empty: return 0
