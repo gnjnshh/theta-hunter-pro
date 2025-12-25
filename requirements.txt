@@ -1,7 +1,7 @@
 matplotlib
 nselib
 pandas
-pandas_ta
+pandas-ta
 streamlit
 plotly
 numpy
