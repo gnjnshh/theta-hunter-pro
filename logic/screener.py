@@ -119,12 +119,12 @@ def save_results(results, fii_stats):
         json.dump(fii_stats, f)
 
 def run_screener():
-    print("Starting Optimized Market Scan (Top 500 Stocks)...")
+    print("Starting Optimized Market Scan (Top 200 Stocks)...")
     
-    top_stocks = get_top_500_active_stocks()
+    top_stocks = get_top_500_active_stocks()[:200]  # Focus on top 200 for reliable execution
     ban_list = get_fno_ban_list()
     universe = [s for s in top_stocks if s not in ban_list]
-    print(f"Universe size: {len(universe)} stocks. Parallelizing fetches...")
+    print(f"Universe size: {len(universe)} stocks. Using conservative parallelization...")
 
     # Initial FII Sentiment
     fii_data = get_fii_sentiment()
@@ -138,7 +138,7 @@ def run_screener():
         except: pass
 
     results = []
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=3) as executor:  # Reduced for cloud reliability
         futures = {executor.submit(analyze_stock, s): s for s in universe}
         
         count = 0

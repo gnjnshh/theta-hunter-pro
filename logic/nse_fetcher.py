@@ -56,19 +56,25 @@ def get_fno_ban_list():
         print(f"Error fetching F&O ban list: {e}")
         return []
 
-def get_ohlc_history(symbol, days=60):
+def get_ohlc_history(symbol, days=60, max_retries=3):
     """
     Fetch OHLC history for a symbol for the last 'days' days.
+    Includes retry logic for reliability on cloud runners.
     """
+    import time
     end_date = datetime.now().strftime('%d-%m-%Y')
     start_date = (datetime.now() - timedelta(days=days)).strftime('%d-%m-%Y')
-    try:
-        # This function name is relatively stable
-        data = capital_market.price_volume_and_deliverable_position_data(symbol=symbol, from_date=start_date, to_date=end_date)
-        return data
-    except Exception as e:
-        print(f"Error fetching OHLC for {symbol}: {e}")
-        return pd.DataFrame()
+    
+    for attempt in range(max_retries):
+        try:
+            data = capital_market.price_volume_and_deliverable_position_data(symbol=symbol, from_date=start_date, to_date=end_date)
+            if isinstance(data, pd.DataFrame) and not data.empty:
+                return data
+        except Exception as e:
+            if attempt < max_retries - 1:
+                time.sleep(0.5 * (attempt + 1))  # Exponential backoff: 0.5s, 1s, 1.5s
+                continue
+    return pd.DataFrame()
 
 def get_fii_sentiment():
     """
