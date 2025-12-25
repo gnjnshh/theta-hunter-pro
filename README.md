@@ -2,6 +2,7 @@
 **Delta-Neutral Options Screener for NSE Stocks**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge.svg)](https://theta-hunter-pro.streamlit.app/)
+[![Daily Market Scan](https://github.com/gnjnshh/theta-hunter-pro/actions/workflows/daily_scan.yml/badge.svg)](https://github.com/gnjnshh/theta-hunter-pro/actions/workflows/daily_scan.yml)
 
 ## 🚀 Live Dashboard
 View the latest sideways opportunities here: **[theta-hunter-pro.streamlit.app](https://theta-hunter-pro.streamlit.app/)**
