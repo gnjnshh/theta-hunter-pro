@@ -1,0 +1,6 @@
+nselib
+pandas
+pandas_ta
+streamlit
+plotly
+numpy

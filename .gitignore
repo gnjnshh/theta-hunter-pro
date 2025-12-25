@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+data/*.csv
+data/*.json
+.env
+.ipynb_checkpoints/
+*.log
+.streamlit/config.toml
