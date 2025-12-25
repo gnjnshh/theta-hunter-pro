@@ -5,6 +5,9 @@ on:
     - cron: '15 10 * * 1-5'  # 10:15 UTC = 3:45 PM IST
   workflow_dispatch:        # Allow manual runs
 
+permissions:
+  contents: write
+
 jobs:
   scan:
     runs-on: ubuntu-latest

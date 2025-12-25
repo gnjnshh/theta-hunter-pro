@@ -1,6 +1,10 @@
-# Short Strangle Bot
+# 🎯 Theta Hunter Pro
+**Delta-Neutral Options Screener for NSE Stocks**
 
-An automated NSE options screener for identifying "Sideways" stocks for Short Strangle strategies.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge.svg)](https://theta-hunter-pro.streamlit.app/)
+
+## 🚀 Live Dashboard
+View the latest sideways opportunities here: **[theta-hunter-pro.streamlit.app](https://theta-hunter-pro.streamlit.app/)**
 
 ## Features
 - **Daily Scan**: Runs automatically via GitHub Actions at market close.
