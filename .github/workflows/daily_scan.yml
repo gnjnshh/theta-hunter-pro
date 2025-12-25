@@ -38,3 +38,11 @@ jobs:
         git add data/market_scan.csv data/fii_stats.json
         git commit -m "Auto-Update: Daily Scan Results $(date +'%Y-%m-%d')" || echo "No changes to commit"
         git push
+
+    - name: Send Notifications
+      env:
+        PYTHONPATH: ${{ github.workspace }}
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: python -m logic.notifier
