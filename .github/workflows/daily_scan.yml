@@ -28,7 +28,7 @@ jobs:
 
     - name: Run Screener
       env:
-        PYTHONPATH: ${{ github.workspace }}/logic
+        PYTHONPATH: ${{ github.workspace }}
       run: python logic/screener.py
 
     - name: Commit and Push Results

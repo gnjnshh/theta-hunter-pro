@@ -1,3 +1,4 @@
+matplotlib
 nselib
 pandas
 pandas_ta
