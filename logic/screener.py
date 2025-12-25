@@ -1,5 +1,11 @@
 import pandas as pd
-import pandas_ta as ta
+try:
+    import pandas_ta as ta
+except ImportError:
+    try:
+        import pandas_ta_classic as ta
+    except ImportError:
+        raise ImportError("Neither pandas_ta nor pandas_ta_classic could be imported")
 import numpy as np
 import json
 import os
