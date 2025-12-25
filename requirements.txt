@@ -2,6 +2,7 @@ matplotlib
 nselib
 pandas
 pandas-ta-classic
+pandas_market_calendars
 streamlit
 plotly
 numpy
