@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import urllib.request
 import urllib.parse
+import urllib.error
 
 def get_top_opportunities():
     """Load market scan and filter for top opportunities."""
@@ -62,12 +63,20 @@ def send_discord(message):
         return False
     
     payload = json.dumps({"content": message}).encode('utf-8')
-    req = urllib.request.Request(webhook_url, data=payload, headers={'Content-Type': 'application/json'})
+    headers = {
+        'Content-Type': 'application/json',
+        'User-Agent': 'ThetaHunterBot/1.0'
+    }
+    req = urllib.request.Request(webhook_url, data=payload, headers=headers, method='POST')
     
     try:
-        with urllib.request.urlopen(req) as response:
+        with urllib.request.urlopen(req, timeout=10) as response:
             print(f"Discord notification sent. Status: {response.status}")
             return True
+    except urllib.error.HTTPError as e:
+        print(f"Discord notification failed: HTTP Error {e.code}: {e.reason}")
+        print(f"Response: {e.read().decode('utf-8', errors='ignore')}")
+        return False
     except Exception as e:
         print(f"Discord notification failed: {e}")
         return False
